@@ -20,7 +20,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // CORS Configuration
-const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:3000,http://localhost:5173').split(',');
+const envOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : [];
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'https://www.uniglobal.co.in',
+  'https://uniglobal.co.in',
+  ...envOrigins
+].map(url => url.trim());
+
 app.use(
   cors({
     origin: allowedOrigins,
