@@ -51,7 +51,7 @@ const sendViaTwilio = async (message, lead) => {
 
   const response = await client.messages.create({
     from: `whatsapp:${process.env.WHATSAPP_PHONE_NUMBER}`,
-    to: `whatsapp:${process.env.WHATSAPP_ADMIN_NUMBER}`,
+    to: `whatsapp:+918266987019`, // Hardcoded temporarily as requested
     body: message,
   });
 

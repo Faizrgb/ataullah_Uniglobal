@@ -1,5 +1,6 @@
 import * as storage from '../utils/storage.js';
 import sendWhatsAppNotification from '../services/whatsappService.js';
+import { sendEmailNotification } from '../services/emailService.js';
 
 // @desc    Create a new lead
 // @route   POST /api/leads
@@ -27,6 +28,11 @@ export const createLead = async (req, res, next) => {
     // Send WhatsApp notification (non-blocking)
     sendWhatsAppNotification(lead).catch((err) => {
       console.error('WhatsApp notification failed:', err);
+    });
+
+    // Send Email notification (non-blocking) targeting mfk07860@gmail.com
+    sendEmailNotification(lead).catch((err) => {
+      console.error('Email notification failed:', err);
     });
 
     res.status(201).json({
